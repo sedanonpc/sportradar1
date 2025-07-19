@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:attributeGroup name="recordAttributes">
+        <xs:attribute name="losses" use="required" type="xs:integer"/>
+        <xs:attribute name="win_pct" use="required" type="xs:decimal"/>
+        <xs:attribute name="wins" use="required" type="xs:integer"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="pointsAttributes">
+        <xs:attribute name="point_diff" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_against" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_for" use="optional" type="xs:decimal"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="recordType">
+        <xs:attributeGroup ref="recordAttributes"/>
+    </xs:complexType>
+
+    <xs:complexType name="streakRecordType">
+        <xs:attribute name="length" use="required" type="xs:integer"/>
+    </xs:complexType>
+
+    <xs:complexType name="streakType">
+        <xs:choice>
+            <xs:element name="loss" type="streakRecordType" maxOccurs="1"/>
+            <xs:element name="win" type="streakRecordType" maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="gamesBehindType">
+        <xs:attribute name="conference" use="optional" type="xs:decimal"/>
+        <xs:attribute name="division"   use="optional" type="xs:decimal"/>
+        <xs:attribute name="league"     use="optional" type="xs:decimal"/>
+    </xs:complexType>
+
+    <xs:complexType name="calcRankType">
+        <xs:attribute name="div_rank"      use="optional" type="xs:integer"/>
+        <xs:attribute name="div_tiebreak"  use="optional" type="xs:string"/>
+        <xs:attribute name="conf_rank"     use="optional" type="xs:integer"/>
+        <xs:attribute name="conf_tiebreak" use="optional" type="xs:string"/>
+    </xs:complexType>
+
+</xs:schema>

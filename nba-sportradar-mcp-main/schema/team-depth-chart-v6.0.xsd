@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:t="http://feed.elasticstats.com/schema/basketball/team-depth-chart-v6.0.xsd"
+           targetNamespace="http://feed.elasticstats.com/schema/basketball/team-depth-chart-v6.0.xsd"
+           elementFormDefault="qualified" >
+
+  <xs:include schemaLocation="common-v2.0.xsd" />
+  
+  <xs:complexType name="teamType">
+    <xs:sequence>
+      <xs:element name="venue" type="t:venueType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="hierarchy" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="league" type="t:organizationType" minOccurs="1" maxOccurs="1" />
+              <xs:element name="conference" type="t:organizationType" minOccurs="0" maxOccurs="1" />
+              <xs:element name="division" type="t:organizationType" minOccurs="0" maxOccurs="1" />
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="coaches" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="coach" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attributeGroup ref="t:baseCoachAttributes" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="positions" type="t:depthChartPositions"/>
+
+    </xs:sequence>
+    <xs:attributeGroup ref="t:baseTeamAttributes" />
+  </xs:complexType>
+
+  <xs:element name="team" type="t:teamType" />
+
+  <xs:complexType name="depthChartPositionType">
+    <xs:sequence>
+      <xs:element name="players" type="t:playerProfileCollectionType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="name" type="t:depthChartPositionEnum" />
+    <xs:attribute name="desc" type="xs:string" />
+    <xs:attribute name="id" use="optional" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="depthChartPlayerType">
+    <xs:attribute name="id" use="optional" type="xs:string" />
+    <xs:attribute name="full_name" use="optional" type="xs:string"/>
+    <xs:attribute name="primary_position" use="optional" type="t:dcPositionType"/>
+    <xs:attribute name="position" use="optional" type="t:positionType" />
+    <xs:attribute name="jersey_number" use="optional" type="xs:string"/>
+    <xs:attribute name="reference" use="optional" type="xs:string" />
+    <xs:attribute name="depth" type="xs:integer" use="required" />
+    <xs:attribute name="sr_id" use="optional" type="xs:string" />
+  </xs:complexType>
+
+  <xs:simpleType name="depthChartPositionEnum">
+    <xs:union memberTypes="t:positionType" />
+  </xs:simpleType>
+
+  <xs:complexType name="depthChartPositions">
+    <xs:sequence>
+      <xs:element name="position" type="t:depthChartPositionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="playerProfileCollectionType">
+    <xs:sequence>
+      <xs:element name="player" type="t:depthChartPlayerType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="dcPositionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PG" />
+      <xs:enumeration value="SG" />
+      <xs:enumeration value="SF" />
+      <xs:enumeration value="PF" />
+      <xs:enumeration value="C" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,10 @@
+{
+  "servers": [
+    {
+      "name": "nba-sportradar-mcp",
+      "transport": "stdio",
+      "command": ["python", "-m", "nba_sportradar_mcp.server", "--transport", "stdio"],
+      "workingDir": "E:\\NPC\\01 DAREDEVIL\\SPORTRADAR NBA\\nba-sportradar-mcp-main"
+    }
+  ]
+} 

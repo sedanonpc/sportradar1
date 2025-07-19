@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:r="http://feed.elasticstats.com/schema/basketball/nba/rankings-v3.0.xsd" 
+           targetNamespace="http://feed.elasticstats.com/schema/basketball/nba/rankings-v3.0.xsd"
+           elementFormDefault="qualified">
+  
+  <xs:include schemaLocation="../common-v2.0.xsd"/>
+  
+  <xs:complexType name="leagueType">
+    <xs:sequence>
+      <xs:element name="season" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="conference" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="division" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="team" minOccurs="0" maxOccurs="unbounded">
+                          <xs:complexType>
+                            <xs:sequence>
+                              <xs:element name="rank" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                  <xs:attribute name="clinched" use="optional">
+                                    <xs:simpleType>
+                                      <xs:restriction base="xs:string">
+                                        <xs:enumeration value="division"/>
+                                        <xs:enumeration value="conference"/>
+                                        <xs:enumeration value="playoff_berth"/>
+                                        <xs:enumeration value="eliminated"/>
+                                        <xs:enumeration value="play_in_berth"/>
+                                      </xs:restriction>
+                                    </xs:simpleType>
+                                  </xs:attribute>
+                                  <xs:attribute name="conference" use="required" type="xs:integer"/>
+                                  <xs:attribute name="division" use="required" type="xs:integer"/>
+                                </xs:complexType>
+                              </xs:element>
+                            </xs:sequence>
+                            <xs:attributeGroup ref="r:baseTeamAttributes"/>
+                          </xs:complexType>
+                        </xs:element>
+                      </xs:sequence>
+                      <xs:attributeGroup ref="r:baseOrganizationAttributes"/>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attributeGroup ref="r:baseOrganizationAttributes"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="id" use="required"/>
+          <xs:attribute name="type" use="required" type="xs:string"/>
+          <xs:attribute name="year" use="required" type="xs:integer"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attributeGroup ref="r:baseOrganizationAttributes"/>
+  </xs:complexType>
+  
+  <xs:element name="league" type="r:leagueType"/>
+</xs:schema>

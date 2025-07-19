@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://feed.elasticstats.com/schema/basketball/statistics-v3.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+  <xs:include schemaLocation="common-v2.0.xsd"/>
+  <xs:include schemaLocation="common-statistics-v3.0.xsd"/>
+  
+  <xs:complexType name="seasonType">
+    <xs:choice>
+      <xs:element name="team" type="s:teamType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="leaders" type="s:leadersType" minOccurs="1" maxOccurs="1" />
+    </xs:choice>
+    <xs:attribute name="id" use="required" type="xs:string"/>
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="year" use="required" type="xs:integer"/>
+  </xs:complexType>
+ 
+  <xs:element name="season" type="s:seasonType" />
+
+  <xs:complexType name="seriesType">
+    <xs:sequence>
+      <xs:element name="team" type="s:teamType" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="id" use="required" type="xs:string" />
+    <xs:attribute name="title" use="optional" type="xs:string" />
+    <xs:attributeGroup ref="s:eventStatusAttributes" />
+  </xs:complexType>
+  
+  <xs:element name="series" type="s:seriesType" />
+
+  <xs:complexType name="tournamentType">
+    <xs:sequence>
+      <xs:element name="team" type="s:teamType" minOccurs="1" maxOccurs="1"/>  
+    </xs:sequence>
+    <xs:attribute name="id" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attributeGroup ref="s:eventStatusAttributes" />
+  </xs:complexType>
+  
+  <xs:element name="tournament" type="s:tournamentType" />
+
+  <xs:complexType name="teamType">
+    <xs:sequence>
+      <xs:element name="splits" type="s:teamSplitsType" minOccurs="0" maxOccurs="1" />
+      
+      <xs:element name="team_records" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="overall" type="s:teamRecordType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="opponents" type="s:teamRecordType" minOccurs="0" maxOccurs="1" />  
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      
+      <xs:element name="player_records" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="player" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="overall" type="s:playerRecordType" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="splits"  type="s:playerSplitsType" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+                <xs:attributeGroup ref="s:basePlayerAttributes" />
+              </xs:complexType>  
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      
+    </xs:sequence>
+    <xs:attributeGroup ref="s:baseTeamAttributes" />
+  </xs:complexType>
+ 
+  <xs:complexType name="leadersType">
+    <xs:sequence>
+      <xs:element name="category" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="rank" type="s:rankType" minOccurs="0" maxOccurs="unbounded" />  
+          </xs:sequence>
+          <xs:attribute name="name" use="required" type="xs:string" />
+          <xs:attribute name="type" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="total" />
+                <xs:enumeration value="average" />
+              </xs:restriction>
+            </xs:simpleType>  
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>  
+    </xs:sequence>
+    <xs:attributeGroup ref="s:baseOrganizationAttributes" />
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="league" />
+          <xs:enumeration value="division" />
+          <xs:enumeration value="conference" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>    
+  </xs:complexType>
+ 
+  <xs:complexType name="rankType">
+    <xs:sequence>
+      <xs:element name="player" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:attributeGroup ref="s:basePlayerAttributes" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="team" minOccurs="1" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attributeGroup ref="s:baseTeamAttributes" />
+        </xs:complexType>  
+      </xs:element>
+      <xs:element name="statistics" type="s:playerRecordType" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="rank" use="required" type="xs:integer" />
+    <xs:attribute name="tied" use="optional" type="xs:boolean" />
+    <xs:attribute name="score" use="required" type="xs:decimal" />
+  </xs:complexType>
+ 
+</xs:schema>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:h="http://feed.elasticstats.com/schema/basketball/nba/hierarchy-v8.0.xsd"
+           targetNamespace="http://feed.elasticstats.com/schema/basketball/nba/hierarchy-v8.0.xsd"
+           elementFormDefault="qualified" >
+
+  <xs:include schemaLocation="../common-v8.0.xsd" />
+
+  <xs:complexType name="leagueType">
+    <xs:sequence>
+      <xs:element name="conference" type="h:conferenceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="h:baseOrganizationAttributes" />
+  </xs:complexType>
+
+  <xs:element name="league" type="h:leagueType" />
+
+  <xs:complexType name="conferenceType">
+    <xs:sequence>
+      <xs:element name="division" type="h:divisionType"  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="h:baseOrganizationAttributes"/>
+  </xs:complexType>
+
+  <xs:complexType name="divisionType">
+    <xs:sequence>
+      <xs:element name="team" type="h:teamType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="h:baseOrganizationAttributes"/>
+  </xs:complexType>
+
+  <xs:complexType name="teamColorType">
+    <xs:sequence>
+      <xs:element name="rgb_color" >
+        <xs:complexType>
+          <xs:attributeGroup ref="h:rgbColorAttributes"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attributeGroup ref="h:teamColorAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="teamType">
+    <xs:sequence>
+      <xs:element name="team_colors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="team_color" type="h:teamColorType" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="venue" type="h:venueType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="h:baseTeamAttributes"/>
+  </xs:complexType>
+
+</xs:schema>

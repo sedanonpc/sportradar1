@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" 
+  targetNamespace="http://feed.elasticstats.com/schema/basketball/daily-injuries-v8.0.xsd"
+  xmlns:di="http://feed.elasticstats.com/schema/basketball/daily-injuries-v8.0.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:include schemaLocation="common-v8.0.xsd" />
+
+  <xs:attributeGroup name="dailyInjuryAttributes">
+    <xs:attribute name="date" use="required" type="xs:date"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="teamType">
+    <xs:sequence>
+      <xs:element name="player" type="di:playerType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="di:baseTeamAttributes"/>
+  </xs:complexType>
+
+  <xs:complexType name="playerType">
+    <xs:sequence>
+      <xs:element name="injury" type="di:injuryType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="di:basePlayerAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="dailyInjuryType">
+    <xs:sequence>
+      <xs:element name="team" type="di:teamType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="di:dailyInjuryAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="leagueType">
+    <xs:all>
+      <xs:element name="daily_injuries" type="di:dailyInjuryType" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attributeGroup ref="di:baseOrganizationAttributes"/>
+  </xs:complexType>
+
+  <xs:element name="league" type="di:leagueType" />
+</xs:schema>

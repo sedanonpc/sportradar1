@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://feed.elasticstats.com/schema/basketball/free-agents-v7.0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="league">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="free_agents">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="player">
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:string" use="required" />
+                  <xs:attribute name="status" type="xs:string" use="required" />
+                  <xs:attribute name="full_name" type="xs:string" use="required" />
+                  <xs:attribute name="first_name" type="xs:string" use="required" />
+                  <xs:attribute name="last_name" type="xs:string" use="required" />
+                  <xs:attribute name="abbr_name" type="xs:string" use="required" />
+                  <xs:attribute name="height" type="xs:unsignedByte" use="optional" />
+                  <xs:attribute name="weight" type="xs:unsignedShort" use="optional" />
+                  <xs:attribute name="position" type="xs:string" use="required" />
+                  <xs:attribute name="primary_position" type="xs:string" use="required" />
+                  <xs:attribute name="experience" type="xs:unsignedByte" use="optional" />
+                  <xs:attribute name="college" type="xs:string" use="optional" />
+                  <xs:attribute name="high_school" type="xs:string" use="optional" />
+                  <xs:attribute name="birth_place" type="xs:string" use="optional" />
+                  <xs:attribute name="birthdate" type="xs:date" use="optional" />
+                  <xs:attribute name="updated" type="xs:dateTime" use="required" />
+                  <xs:attribute name="rookie_year" type="xs:unsignedShort" use="optional" />
+                  <xs:attribute name="reference" type="xs:unsignedInt" use="optional" />
+                  <xs:attribute name="sr_id" type="xs:string" use="optional" />
+                  <xs:attribute name="name_suffix" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required" />
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="alias" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

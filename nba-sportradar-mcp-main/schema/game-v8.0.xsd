@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:g="http://feed.elasticstats.com/schema/basketball/game-v8.0.xsd"
+           targetNamespace="http://feed.elasticstats.com/schema/basketball/game-v8.0.xsd"
+           elementFormDefault="qualified">
+
+  <xs:include schemaLocation="common-v8.0.xsd"/>
+  <xs:include schemaLocation="common-game-v8.0.xsd"/>
+
+  <xs:complexType name="gameType">
+    <xs:sequence>
+      <xs:element name="season" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="year" type="xs:integer"/>
+          <xs:attribute name="type" type="xs:string"/>
+          <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="time_zones" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:attribute name="home" type="xs:string"/>
+          <xs:attribute name="away" type="xs:string"/>
+          <xs:attribute name="venue" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="venue" type="g:venueType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="team" type="g:teamType" minOccurs="0" maxOccurs="2"/>
+      <xs:element name="officials" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="official" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attributeGroup ref="g:basePersonnelAttributes"/>
+                <xs:attribute name="assignment" use="optional" type="xs:string"/>
+                <xs:attribute name="experience" use="optional" type="xs:string"/>
+                <xs:attribute name="number" use="optional" type="xs:string"/>
+                <xs:attribute name="name_suffix" use="optional" type="xs:string"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+    </xs:sequence>
+    <xs:attributeGroup ref="g:baseGameAttributes"/>
+    <xs:attributeGroup ref="g:gameStateAttributes"/>
+    <xs:attributeGroup ref="g:gameMetadataAttributes"/>
+  </xs:complexType>
+
+  <xs:element name="game" type="g:gameType"/>
+
+  <xs:complexType name="teamType">
+    <xs:sequence>
+      <xs:element name="record" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:attribute name="wins" use="required" type="xs:integer"/>
+          <xs:attribute name="losses" use="required" type="xs:integer"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="scoring" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice>
+              <xs:element name="quarter" type="g:periodScoreType" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element name="half" type="g:periodScoreType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>
+            <xs:element name="overtime" type="g:periodScoreType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="leaders" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="points" type="g:statsLeaderType" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="rebounds" type="g:statsLeaderType" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="assists" type="g:statsLeaderType" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:sequence minOccurs="0" maxOccurs="1">
+          <xs:element name="statistics" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="most_unanswered" minOccurs="0" maxOccurs="1">
+                  <xs:complexType>
+                    <xs:attribute name="points" use="optional" type="xs:integer"/>
+                    <xs:attribute name="own_score" use="optional" type="xs:integer"/>
+                    <xs:attribute name="opp_score" use="optional" type="xs:integer"/>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="periods" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="period" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attributeGroup ref="g:baseStatisticsAttributes"/>
+                          <xs:attributeGroup ref="g:teamStatisticsAttributes"/>
+                          <xs:attribute name="id" use="required" type="xs:string"/>
+                          <xs:attribute name="type" use="required" type="xs:string"/>
+                          <xs:attribute name="number" use="required" type="xs:integer"/>
+                          <xs:attribute name="sequence" use="required" type="xs:integer"/>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+              <xs:attributeGroup ref="g:baseStatisticsAttributes"/>
+              <xs:attributeGroup ref="g:teamStatisticsAttributes"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="coaches" minOccurs="0" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="coach" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:attributeGroup ref="g:baseCoachAttributes"/>
+                    <xs:attribute name="name_suffix" use="optional" type="xs:string"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="players" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="player" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="injuries" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="injury" type="g:injuryType" minOccurs="0"
+                                        maxOccurs="unbounded"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="statistics" minOccurs="0" maxOccurs="1">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="periods" minOccurs="0" maxOccurs="unbounded">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="period" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                      <xs:attributeGroup ref="g:baseStatisticsAttributes"/>
+                                      <xs:attributeGroup ref="g:playerStatisticsAttributes"/>
+                                      <xs:attribute name="id" use="required" type="xs:string"/>
+                                      <xs:attribute name="type" use="required" type="xs:string"/>
+                                      <xs:attribute name="number" use="required" type="xs:integer"/>
+                                      <xs:attribute name="sequence" use="required" type="xs:integer"/>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attributeGroup ref="g:baseStatisticsAttributes"/>
+                          <xs:attributeGroup ref="g:playerStatisticsAttributes"/>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attributeGroup ref="g:basePlayerAttributes"/>
+                    <xs:attribute name="active" use="optional" type="xs:boolean"/>
+                    <xs:attribute name="played" use="optional" type="xs:boolean"/>
+                    <xs:attribute name="starter" use="optional" type="xs:boolean"/>
+                    <xs:attribute name="fouled_out" use="optional" type="xs:boolean"/>
+                    <xs:attribute name="ejected" use="optional" type="xs:boolean"/>
+                    <xs:attribute name="not_playing_reason" use="optional" type="xs:string"/>
+                    <xs:attribute name="not_playing_description" use="optional" type="xs:string"/>
+                    <xs:attribute name="on_court" use="optional" type="xs:boolean"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="g:baseTeamAttributes"/>
+    <xs:attribute name="points" use="required" type="xs:integer"/>
+    <xs:attribute name="rank" use="optional" type="xs:integer"/>
+    <xs:attribute name="bonus" use="optional" type="xs:boolean"/>
+    <xs:attribute name="double_bonus" use="optional" type="xs:boolean"/>
+    <xs:attribute name="remaining_timeouts" use="optional" type="xs:integer"/>
+    <xs:attribute name="home" use="optional" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="statsLeaderType">
+    <xs:sequence>
+      <xs:element name="player" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="statistics" minOccurs="0" maxOccurs="1">
+              <xs:complexType>
+                <xs:attributeGroup ref="g:baseStatisticsAttributes"/>
+                <xs:attributeGroup ref="g:playerStatisticsAttributes"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attributeGroup ref="g:basePlayerAttributes"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

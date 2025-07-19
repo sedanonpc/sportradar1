@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+
+    <xs:complexType name="teamRecordType">
+        <xs:sequence>
+            <xs:element name="total" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attributeGroup ref="teamTotalRecordAttributes" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="average" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attributeGroup ref="teamAverageRecordAttributes" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="playerRecordType">
+        <xs:sequence>
+            <xs:element name="total" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attributeGroup ref="playerTotalRecordAttributes" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="average" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attributeGroup ref="playerAverageRecordAttributes" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:attributeGroup name="averageRecordAttributes">
+        <xs:attribute name="assists" use="optional" type="xs:decimal"/>
+        <xs:attribute name="blocked_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="blocks" use="optional" type="xs:decimal"/>
+        <xs:attribute name="def_rebounds" use="optional" type="xs:decimal"/>
+        <xs:attribute name="field_goals_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="field_goals_made" use="optional" type="xs:decimal"/>
+        <xs:attribute name="flagrant_fouls" use="optional" type="xs:decimal"/>
+        <xs:attribute name="free_throws_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="free_throws_made" use="optional" type="xs:decimal"/>
+        <xs:attribute name="minutes" use="optional" type="xs:decimal"/>
+        <xs:attribute name="off_rebounds" use="optional" type="xs:decimal"/>
+        <xs:attribute name="personal_fouls" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points" use="optional" type="xs:decimal"/>
+        <xs:attribute name="rebounds" use="optional" type="xs:decimal"/>
+        <xs:attribute name="steals" use="optional" type="xs:decimal"/>
+        <xs:attribute name="three_points_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="three_points_made" use="optional" type="xs:decimal"/>
+        <xs:attribute name="turnovers" use="optional" type="xs:decimal"/>
+        <xs:attribute name="two_points_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="two_points_made" use="optional" type="xs:decimal"/>
+
+        <xs:attribute name="points_in_paint" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_in_paint_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_in_paint_made" use="optional" type="xs:decimal"/>
+        <xs:attribute name="effective_fg_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="true_shooting_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="true_shooting_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="second_chance_pts" use="optional" type="xs:decimal" />  
+        <xs:attribute name="second_chance_att" use="optional" type="xs:decimal" />  
+        <xs:attribute name="second_chance_made" use="optional" type="xs:decimal" />
+        <xs:attribute name="bench_points" use="optional" type="xs:decimal" />  
+        <xs:attribute name="fouls_drawn" use="optional" type="xs:decimal" />
+        <xs:attribute name="offensive_fouls" use="optional" type="xs:decimal" />  
+        <xs:attribute name="efficiency" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_off_turnovers" use="optional" type="xs:decimal"/>
+        <xs:attribute name="fast_break_pts" use="optional" type="xs:decimal"/>
+        <xs:attribute name="fast_break_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="fast_break_made" use="optional" type="xs:decimal"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="playerAverageRecordAttributes">
+        <xs:attributeGroup ref="averageRecordAttributes" />
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="teamAverageRecordAttributes">
+        <xs:attributeGroup ref="averageRecordAttributes" />
+    </xs:attributeGroup>  
+    
+    <xs:attributeGroup name="totalRecordAttributes">
+        <xs:attribute name="assists" use="optional" type="xs:integer"/>
+        <xs:attribute name="assists_turnover_ratio" use="optional" type="xs:decimal" />
+        <xs:attribute name="blocked_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="blocks" use="optional" type="xs:integer"/>
+        <xs:attribute name="defensive_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="field_goals_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="field_goals_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="field_goals_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="flagrant_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="free_throws_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="free_throws_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="free_throws_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="games_played" use="optional" type="xs:integer"/>
+        <xs:attribute name="minutes" use="optional" type="xs:decimal"/>
+        <xs:attribute name="offensive_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="personal_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="total_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="points" use="optional" type="xs:integer"/>
+        <xs:attribute name="points_against" use="optional" type="xs:integer"/>
+        <xs:attribute name="rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="total_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="seconds_played" use="optional" type="xs:integer"/>
+        <xs:attribute name="steals" use="optional" type="xs:integer"/>
+        <xs:attribute name="tech_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="tech_fouls_non_unsportsmanlike" use="optional" type="xs:integer"/>
+        <xs:attribute name="three_points_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="three_points_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="three_points_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="turnovers" use="optional" type="xs:integer"/>
+        <xs:attribute name="two_points_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="two_points_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="two_points_pct" use="optional" type="xs:decimal"/>
+        
+		<xs:attribute name="ejections" use="optional" type="xs:integer" />
+		<xs:attribute name="foulouts" use="optional" type="xs:integer" />
+        <xs:attribute name="points_in_paint" use="optional" type="xs:integer"/>
+        <xs:attribute name="points_in_paint_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="points_in_paint_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="points_in_paint_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="effective_fg_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="true_shooting_att" use="optional" type="xs:decimal"/>
+        <xs:attribute name="true_shooting_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="second_chance_pts" use="optional" type="xs:integer" />  
+        <xs:attribute name="second_chance_att" use="optional" type="xs:integer" />  
+        <xs:attribute name="second_chance_made" use="optional" type="xs:integer" />  
+        <xs:attribute name="second_chance_pct" use="optional" type="xs:decimal" />  
+        <xs:attribute name="fouls_drawn" use="optional" type="xs:integer" />
+        <xs:attribute name="offensive_fouls" use="optional" type="xs:integer" /> 
+        <xs:attribute name="fast_break_pts" use="optional" type="xs:integer"/>
+        <xs:attribute name="fast_break_att" use="optional" type="xs:integer"/>
+        <xs:attribute name="fast_break_made" use="optional" type="xs:integer"/>
+        <xs:attribute name="fast_break_pct" use="optional" type="xs:decimal"/>
+        <xs:attribute name="points_off_turnovers" use="optional" type="xs:integer"/>
+        <xs:attribute name="efficiency" use="optional" type="xs:decimal"/>
+
+        <xs:attribute name="coach_tech_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_tech_fouls" use="optional" type="xs:integer"/>
+        <xs:attribute name="technical_other" use="optional" type="xs:integer"/>
+        <xs:attribute name="coach_ejections" use="optional" type="xs:integer"/>
+        <xs:attribute name="defensive_assists" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_defensive_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_offensive_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="plus" use="optional" type="xs:integer"/>
+        <xs:attribute name="minus" use="optional" type="xs:integer"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="teamTotalRecordAttributes">
+        <xs:attributeGroup ref="totalRecordAttributes" />
+        <xs:attribute name="games_started" use="optional" type="xs:integer"/>
+        <xs:attribute name="bench_points" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_rebounds" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_turnovers" use="optional" type="xs:integer"/>
+        <xs:attribute name="total_turnovers" use="optional" type="xs:integer"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="playerTotalRecordAttributes">
+        <xs:attributeGroup ref="totalRecordAttributes" />
+        <xs:attribute name="games_started" type="xs:integer"/>
+        <xs:attribute name="double_doubles" type="xs:integer"/>
+        <xs:attribute name="triple_doubles" type="xs:integer"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="teamSplitRecordType">
+        <xs:sequence>
+            <xs:element name="venue" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="address" type="xs:string" use="optional" />
+                    <xs:attribute name="city" type="xs:string" use="optional" />
+                    <xs:attribute name="state" type="xs:string" use="optional" />
+                    <xs:attribute name="zip" type="xs:string" use="optional" />
+                    <xs:attribute name="country" type="xs:string" use="optional" />
+                    <xs:attribute name="capacity" type="xs:integer" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="opponent" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="market" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="conference" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="alias" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="division" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="alias" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="team_records" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="overall" type="teamRecordType" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="opponents" type="teamRecordType" minOccurs="0" maxOccurs="1" />  
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>           
+        </xs:sequence>
+        <xs:attribute name="category" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="playerSplitRecordType">
+        <xs:sequence>
+            <xs:element name="venue" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="address" type="xs:string" use="optional" />
+                    <xs:attribute name="city" type="xs:string" use="optional" />
+                    <xs:attribute name="state" type="xs:string" use="optional" />
+                    <xs:attribute name="zip" type="xs:string" use="optional" />
+                    <xs:attribute name="country" type="xs:string" use="optional" />
+                    <xs:attribute name="capacity" type="xs:integer" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="opponent" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="market" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="conference" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="alias" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="division" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string" use="required" />
+                    <xs:attribute name="name" type="xs:string" use="optional" />
+                    <xs:attribute name="alias" type="xs:string" use="optional" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="overall" type="playerRecordType" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="category" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="teamSplitsType">
+      <xs:sequence>
+        <xs:element name="split" type="teamSplitRecordType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="playerSplitsType">
+        <xs:sequence>
+            <xs:element name="split" type="playerSplitRecordType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>                
+    </xs:complexType>
+    
+</xs:schema>

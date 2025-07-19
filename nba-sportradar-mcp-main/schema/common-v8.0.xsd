@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:complexType name="venueType">
+        <xs:all>
+            <xs:element name="location" type="location" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+        <xs:attribute name="id" use="required" type="xs:string"/>
+        <xs:attribute name="name" use="required" type="xs:string"/>
+        <xs:attribute name="desc" use="optional" type="xs:string"/>
+        <xs:attribute name="address" use="optional" type="xs:string"/>
+        <xs:attribute name="capacity" use="optional" type="xs:integer"/>
+        <xs:attribute name="city" use="optional" type="xs:string"/>
+        <xs:attribute name="country" use="optional" type="xs:string"/>
+        <xs:attribute name="state" use="optional" type="xs:string"/>
+        <xs:attribute name="zip" use="optional" type="xs:string"/>
+        <xs:attribute name="sr_id" use="optional" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="location">
+        <xs:attribute name="lat"  use="optional" type="xs:string"/>
+        <xs:attribute name="lng"  use="optional" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="injuryType">
+        <xs:attribute name="id" use="required" type="xs:string"/>
+        <xs:attribute name="desc" use="optional" type="xs:string"/>
+        <xs:attribute name="comment" use="optional" type="xs:string"/>
+        <xs:attribute name="start_date" use="required" type="xs:date"/>
+        <xs:attribute name="update_date" use="optional" type="xs:date"/>
+        <xs:attribute name="status" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Unknown" />
+                    <xs:enumeration value="Day To Day" />
+                    <xs:enumeration value="Out" />
+                    <xs:enumeration value="Out For Season" />
+                    <xs:enumeration value="Out Indefinitely" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="organizationType">
+        <xs:attributeGroup ref="baseOrganizationAttributes" />
+    </xs:complexType>
+    
+    <xs:complexType name="draftType">
+        <xs:attribute name="pick" use="optional" type="xs:integer"/>
+        <xs:attribute name="round" use="optional" type="xs:integer"/>
+        <xs:attribute name="team_id" use="optional" type="xs:string"/>
+        <xs:attribute name="year" use="optional" type="xs:integer"/>
+    </xs:complexType>
+    
+    <xs:attributeGroup name="baseOrganizationAttributes">
+        <xs:attribute name="id" use="optional" type="xs:string" />
+        <xs:attribute name="reference" use="optional" type="xs:string" />
+        <xs:attribute name="name" use="optional" type="xs:string"/>
+        <xs:attribute name="alias" use="optional" type="xs:string"/>
+        <xs:attribute name="sr_id" use="optional" type="xs:string" />
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="teamColorAttributes">
+        <xs:attribute name="type" type="xs:string" />
+        <xs:attribute name="hex_color" type="xs:string" />
+        <xs:attribute name="alpha" type="xs:float" />
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="baseTeamAttributes">
+        <xs:attributeGroup ref="baseOrganizationAttributes" />
+        <xs:attribute name="market" use="optional" type="xs:string"/>
+        <xs:attribute name="founded" use="optional" type="xs:integer" />
+        <xs:attribute name="owner" use="optional" type="xs:string" />
+        <xs:attribute name="general_manager" use="optional" type="xs:string" />
+        <xs:attribute name="president" use="optional" type="xs:string" />
+        <xs:attribute name="mascot" use="optional" type="xs:string" />
+        <xs:attribute name="nicknames" use="optional" type="xs:string" />
+        <xs:attribute name="sponsor" use="optional" type="xs:string" />
+        <xs:attribute name="fight_song" use="optional" type="xs:string" />
+        <xs:attribute name="championship_seasons" use="optional" type="xs:string" />
+        <xs:attribute name="retired_numbers" use="optional" type="xs:string" />
+        <xs:attribute name="gleague_affiliate" use="optional" type="xs:string" />
+        <xs:attribute name="championships_won" use="optional" type="xs:integer" />
+        <xs:attribute name="conference_titles" use="optional" type="xs:integer" />
+        <xs:attribute name="division_titles" use="optional" type="xs:integer" />
+        <xs:attribute name="playoff_appearances" use="optional" type="xs:integer" />
+    </xs:attributeGroup>
+
+    <xs:simpleType name="positionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NA" />
+            <xs:enumeration value="C" />
+            <xs:enumeration value="C-F" />
+            <xs:enumeration value="F" />
+            <xs:enumeration value="F-C" />
+            <xs:enumeration value="F-G" />
+            <xs:enumeration value="G" />
+            <xs:enumeration value="G-F" />
+            <xs:enumeration value="PF" />
+            <xs:enumeration value="PG" />
+            <xs:enumeration value="SF" />
+            <xs:enumeration value="SG" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:attributeGroup name="basePersonnelAttributes">
+        <xs:attribute name="id" use="optional" type="xs:string" />
+        <xs:attribute name="reference" use="optional" type="xs:string" />
+        <xs:attribute name="first_name" use="optional" type="xs:string"/>
+        <xs:attribute name="last_name" use="optional" type="xs:string"/>
+        <xs:attribute name="full_name" use="optional" type="xs:string"/>
+        <xs:attribute name="sr_id" use="optional" type="xs:string" />
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="basePlayerAttributes">
+        <xs:attributeGroup ref="basePersonnelAttributes"/>
+        <xs:attribute name="abbr_name" use="optional" type="xs:string"/>
+        <xs:attribute name="name_suffix" use="optional" type="xs:string"/>
+        <xs:attribute name="jersey_number" use="optional" type="xs:string"/>
+        <xs:attribute name="position" use="optional" type="positionType" />
+        <xs:attribute name="primary_position" use="optional" type="positionType"/>
+        <xs:attribute name="status" use="optional">
+            <xs:simpleType >
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACT" />
+                    <xs:enumeration value="SUS"/>
+                    <xs:enumeration value="IR"/>
+                    <xs:enumeration value="D-LEAGUE" />
+                    <xs:enumeration value="NWT" />
+                    <xs:enumeration value="FA" />
+                    <xs:enumeration value="RET" />
+                    <xs:enumeration value="PRM" />
+                    <xs:enumeration value="DUP" />
+                    <xs:enumeration value="M-LEAGUE" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="extendedPlayerAttributes">
+        <xs:attributeGroup ref="basePlayerAttributes" />
+        <xs:attribute name="college" use="optional" type="xs:string"/>
+        <xs:attribute name="high_school" use="optional" type="xs:string" />
+        <xs:attribute name="birth_place" use="optional" type="xs:string" />
+        <xs:attribute name="birthdate" use="optional" type="xs:date" />
+        
+        <xs:attribute name="experience" use="optional" type="xs:string"/>
+        
+        <xs:attribute name="height" use="optional" type="xs:integer"/>
+        <xs:attribute name="weight" use="optional" type="xs:integer"/>
+        <xs:attribute name="updated" use="optional" type="xs:dateTime"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="baseCoachAttributes">
+        <xs:attributeGroup ref="basePersonnelAttributes" />
+        <xs:attribute name="position" use="optional" type="xs:string" />
+        <xs:attribute name="experience" use="optional" type="xs:string"/>
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="eventStatusAttributes">
+        <xs:attribute name="status" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="scheduled" />
+                    <xs:enumeration value="inprogress" />
+                    <xs:enumeration value="closed" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="rgbColorAttributes">
+        <xs:attribute name="red" type="xs:integer" />
+        <xs:attribute name="green" type="xs:integer" />
+        <xs:attribute name="blue" type="xs:integer" />
+    </xs:attributeGroup>
+    
+</xs:schema>
