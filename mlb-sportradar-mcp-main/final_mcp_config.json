@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "f1-mcp-server": {
+      "command": "python",
+      "args": ["-m", "f1_mcp_server", "--transport", "stdio"]
+    },
+    "mlb-sportradar-mcp": {
+      "command": "python",
+      "args": ["-m", "mlb_sportradar_mcp", "--transport", "stdio"]
+    }
+  }
+} 
